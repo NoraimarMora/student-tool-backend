@@ -1,8 +1,8 @@
 'use strict'
 
-var express = require('express');
-var router = express.Router();
-var CareerController = require('../controllers/career');
+const express = require('express');
+const router = express.Router();
+const CareerController = require('../controllers/career');
 
 router.post('/career', CareerController.addCareer);
 router.get('/career/:id', CareerController.getCareer);

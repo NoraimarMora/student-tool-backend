@@ -1,14 +1,15 @@
 'use strict'
 
-var express = require('express');
-var router = express.Router();
-var CourseController = require('../controllers/course');
+const express = require('express');
+const router = express.Router();
+const CourseController = require('../controllers/course');
+const checkCourseSchema = require('../schemas_validator/course');
 
-router.post('/course', CourseController.addCourse);
+router.post('/course', checkCourseSchema, CourseController.addCourse);
 router.get('/course/:id', CourseController.getCourse);
 router.get('/courses', CourseController.getAllCourses);
 router.post('/courses/suggested', CourseController.getSuggestedCourses);
-router.put('/course/update/:id', CourseController.updateCourse);
+router.put('/course/update/:id', checkCourseSchema, CourseController.updateCourse);
 router.delete('/course/delete/:id', CourseController.deleteCourse);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const db = require("../firebase");
 const User = require("../models/user");
+const { body, validationResult } = require('express-validator');
 
 const getAllUsers = async (req, res, next) => {
     try {
@@ -69,6 +70,17 @@ const getUser = async (req, res, next) => {
 
 const addUser = async (req, res, next) => {
     try {
+        // Validations
+        // body('email').isEmail();
+        // body('password').isLength({min: 6});
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                errors: errors.array()
+            });
+        }
+
         console.log("Adding new user");
         const data = req.body;
         
